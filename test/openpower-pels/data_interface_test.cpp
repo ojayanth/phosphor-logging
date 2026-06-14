@@ -26,11 +26,9 @@ TEST(DataInterfaceTest, ExtractConnectorLocCode)
 TEST(DataInterfaceTest, ExtractUptime)
 {
     uint64_t seconds = 123456789;
-    std::string retUptime = "3y 332d 21h 33m 9s";
+    std::string expected = "3y 332d 21h 33m 9s";
 
-    auto bus = sdbusplus::bus::new_default();
-    DataInterface dataIntf(bus);
-    std::string uptime = dataIntf.getBMCUptime(seconds);
+    std::string uptime = DataInterface::getBMCUptime(seconds);
 
-    EXPECT_EQ(uptime, retUptime);
+    EXPECT_EQ(uptime, expected);
 }

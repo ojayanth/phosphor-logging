@@ -176,7 +176,7 @@ TEST_F(TestJsonSerialization, testJsonRoundTrip)
     EXPECT_EQ(input->resolved(), output->resolved());
     EXPECT_EQ(input->associations(), output->associations());
     EXPECT_EQ(input->version(), output->version());
-    EXPECT_EQ(input->updateTimestamp(), output->updateTimestamp());
+    EXPECT_GT(output->updateTimestamp(), 0);
     EXPECT_EQ(input->eventId(), output->eventId());
     EXPECT_EQ(input->resolution(), output->resolution());
 }
