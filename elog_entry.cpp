@@ -14,6 +14,33 @@ namespace phosphor
 {
 namespace logging
 {
+namespace
+{
+
+using CperType =
+    sdbusplus::xyz::openbmc_project::Logging::Diagnostic::server::CPER::Type;
+
+CperType toCperType(const std::string& type)
+{
+    using Type = CperType;
+
+    if (type == "CPERSection" ||
+        type == "xyz.openbmc_project.Logging.Diagnostic.CPER.Type.CPERSection")
+    {
+        return Type::CPERSection;
+    }
+
+    if (type == "CPER" ||
+        type == "xyz.openbmc_project.Logging.Diagnostic.CPER.Type.CPER")
+    {
+        return Type::CPER;
+    }
+
+    // fallback
+    return Type::CPER;
+}
+
+} // anonymous namespace
 
 // TODO Add interfaces to handle the error log id numbering
 
@@ -170,6 +197,31 @@ Entry& Entry::operator=(const Entry& source)
     }
 
     return *this;
+}
+
+void Entry::createCperInterface(const std::string& type,
+                                const std::string& diagInfo,
+                                const std::string& dataObj)
+{
+    if (cperIface)
+    {
+        return;
+    }
+
+    cperIface = std::make_unique<CperIface>(busRef, objPathStr.c_str());
+
+    cperIface->type(toCperType(type));
+
+    std::map<std::string, std::variant<std::string, uint64_t, bool>> diagMap;
+
+    diagMap["Summary"] = diagInfo;
+
+    cperIface->diagnosticInfo(diagMap);
+
+    if (!dataObj.empty())
+    {
+        cperIface->additionalDataObject(dataObj);
+    }
 }
 
 } // namespace logging

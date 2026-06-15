@@ -217,6 +217,93 @@ TEST_F(TestJsonSerialization, testDeserializeMissingField)
     EXPECT_FALSE(deserializeJSON(jsonPath, *output));
 }
 
+TEST_F(TestJsonSerialization, testJsonRoundTripWithCper)
+{
+    auto id = 78;
+
+    phosphor::logging::AssociationList associations{
+        {"callout", "fault", "/xyz/openbmc_project/inventory/system/board"}};
+
+    std::map<std::string, std::string> testData = {{"REASON", "cper"},
+                                                   {"CODE", "99"}};
+
+    uint64_t timestamp{600};
+    std::string message{"cper roundtrip"};
+    std::string fwLevel{"v3.0"};
+
+    std::string inputPath = getEntrySerializePath(id);
+
+    auto input = std::make_unique<Entry>(
+        bus, std::string(OBJ_ENTRY) + '/' + std::to_string(id), id, timestamp,
+        Entry::Level::Critical, std::move(message), std::move(testData),
+        std::move(associations), fwLevel, inputPath, Oem{}, manager);
+
+    // ✅ Add CPER
+    input->createCperInterface("CPERSection", "decoded-summary",
+                               "/xyz/openbmc_project/dump/entry/1");
+
+    auto jsonPath = serializeJSON(*input);
+
+    auto output = std::make_unique<Entry>(
+        bus, std::string(OBJ_ENTRY) + '/' + std::to_string(id), id, manager);
+
+    ASSERT_TRUE(deserializeJSON(jsonPath, *output));
+
+    // ✅ Basic checks
+    EXPECT_EQ(input->id(), output->id());
+    EXPECT_EQ(input->message(), output->message());
+
+    // ✅ CPER validation
+    auto* cper = output->getCperIface();
+    ASSERT_NE(cper, nullptr);
+
+    const auto& diagMap = cper->diagnosticInfo();
+
+    std::string typeStr = ::sdbusplus::message::convert_to_string(cper->type());
+
+    std::string summaryStr = diagMap.count("Summary")
+                                 ? std::get<std::string>(diagMap.at("Summary"))
+                                 : "MISSING";
+
+    std::string objPath =
+        static_cast<std::string>(cper->additionalDataObject());
+
+    // ✅ Normalize type (strip namespace)
+    auto getShortType = [](const std::string& type) {
+        auto pos = type.find_last_of('.');
+        return (pos != std::string::npos) ? type.substr(pos + 1) : type;
+    };
+
+    // ✅ Assertions
+    EXPECT_EQ(getShortType(typeStr), "CPERSection");
+
+    ASSERT_EQ(diagMap.count("Summary"), 1);
+
+    EXPECT_EQ(summaryStr, "decoded-summary");
+
+    EXPECT_EQ(objPath, "/xyz/openbmc_project/dump/entry/1");
+}
+
+TEST_F(TestJsonSerialization, testJsonNoCper)
+{
+    auto id = 79;
+
+    std::string inputPath = getEntrySerializePath(id);
+
+    auto input = std::make_unique<Entry>(
+        bus, std::string(OBJ_ENTRY) + '/' + std::to_string(id), id, manager);
+
+    auto jsonPath = serializeJSON(*input);
+
+    std::ifstream is(jsonPath);
+    ASSERT_TRUE(is.good());
+
+    nlohmann::json j;
+    is >> j;
+
+    EXPECT_FALSE(j.contains("Diagnostic"));
+}
+
 } // namespace test
 } // namespace logging
 } // namespace phosphor

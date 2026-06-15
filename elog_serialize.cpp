@@ -12,6 +12,7 @@
 #include <cereal/types/vector.hpp>
 #include <nlohmann/json.hpp>
 #include <phosphor-logging/lg2.hpp>
+#include <sdbusplus/message/types.hpp>
 
 #include <fstream>
 
@@ -206,6 +207,35 @@ fs::path serializeJSON(const Entry& e, const fs::path& dir)
         j["Oem"] = std::move(oemJson);
     }
 
+    // Serialize CPER diagnostic interface (optional)
+    if (auto* cper = e.getCperIface())
+    {
+        nlohmann::json diagJson;
+
+        diagJson["Type"] =
+            ::sdbusplus::message::convert_to_string(cper->type());
+
+        // Convert map<variant> → json
+        nlohmann::json diagInfoJson = nlohmann::json::object();
+
+        for (const auto& [key, val] : cper->diagnosticInfo())
+        {
+            std::visit([&](const auto& v) { diagInfoJson[key] = v; }, val);
+        }
+
+        diagJson["DiagnosticInfo"] = std::move(diagInfoJson);
+
+        std::string objPath =
+            static_cast<std::string>(cper->additionalDataObject());
+
+        if (!objPath.empty())
+        {
+            diagJson["AdditionalDataObject"] = objPath;
+        }
+
+        j["Diagnostic"] = std::move(diagJson);
+    }
+
     std::ofstream os(path.c_str());
     os << j.dump(4);
     return path;
@@ -293,6 +323,47 @@ bool deserializeJSON(const fs::path& path, Entry& e)
             }
 
             e.oem(std::move(oem), true);
+        }
+
+        if (j.contains("Diagnostic"))
+        {
+            const auto& diagJson = j["Diagnostic"];
+
+            std::string type = "CPER";
+            if (diagJson.contains("Type") && diagJson["Type"].is_string())
+            {
+                type = diagJson["Type"].get<std::string>();
+            }
+
+            std::string summary;
+
+            if (diagJson.contains("DiagnosticInfo") &&
+                diagJson["DiagnosticInfo"].is_object())
+            {
+                const auto& info = diagJson["DiagnosticInfo"];
+
+                auto it = info.find("Summary");
+                if (it != info.end() && it->is_string())
+                {
+                    summary = it->get<std::string>();
+                }
+
+                if (summary.empty())
+                {
+                    // fallback ONLY IF missing
+                    summary = "Summary unavailable";
+                }
+            }
+
+            std::string objPath;
+            if (diagJson.contains("AdditionalDataObject") &&
+                diagJson["AdditionalDataObject"].is_string())
+            {
+                objPath = diagJson["AdditionalDataObject"].get<std::string>();
+            }
+
+            // DO NOT modify summary, pass as-is
+            e.createCperInterface(type, summary, objPath);
         }
 
         return true;
