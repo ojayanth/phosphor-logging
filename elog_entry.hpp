@@ -26,7 +26,7 @@ using EntryIfaces = sdbusplus::server::object_t<
 
 using AssociationList =
     std::vector<std::tuple<std::string, std::string, std::string>>;
-using AdditionalDataVec = const std::vector<std::string>&;
+using AdditionalDataVec = std::vector<std::string>;
 using OemType = std::map<std::string, std::map<std::string, std::string>>;
 using CperIface =
     sdbusplus::xyz::openbmc_project::Logging::Diagnostic::server::CPER;

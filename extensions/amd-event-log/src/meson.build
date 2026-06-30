@@ -10,26 +10,25 @@ lut_json_file = lut_json_opt == '' ? default_lut : lut_json_opt
 # ---- LUT generation ----
 lut_gen = custom_target(
     'amd_lut_gen',
-    output : 'amd_ael_lut_gen.hpp',
-    command : [
+    output: 'amd_ael_lut_gen.hpp',
+    command: [
         python,
         meson.current_source_dir() / '../tools/generate_lut.py',
-        '--input', lut_json_file,
-        '--output', '@OUTPUT@'
-    ],
-    depend_files : [
+        '--input',
         lut_json_file,
-        meson.current_source_dir() / '../tools/generate_lut.py'
+        '--output',
+        '@OUTPUT@',
     ],
-    build_by_default : true,
-    console : true
+    depend_files: [
+        lut_json_file,
+        meson.current_source_dir() / '../tools/generate_lut.py',
+    ],
+    build_by_default: true,
+    console: true,
 )
 
 # ---- Extension sources ----
-ael_sources = files(
-    'entry_points.cpp',
-    'amd_ael_decoder.cpp'
-)
+ael_sources = files('amd_ael_decoder.cpp', 'entry_points.cpp')
 
 ael_generated = [lut_gen]
 
@@ -37,7 +36,4 @@ ael_generated = [lut_gen]
 log_manager_ext_sources += ael_sources + ael_generated
 
 # ---- Dependencies ----
-log_manager_ext_deps += [
-    phosphor_logging_dep,
-    conf_h_dep
-]
+log_manager_ext_deps += [phosphor_logging_dep, conf_h_dep]

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <string>
 #include <array>
 #include <optional>
+#include <string>
 
 namespace phosphor::logging::amd
 {
@@ -13,9 +13,8 @@ struct Result
     std::string origin;
 };
 
-std::optional<Result> getAFID(
-    const std::string& registry,
-    const std::string& messageId,
-    const std::array<std::string, 4>& args);
+std::optional<Result> getAFID(const std::string& registry,
+                              const std::string& messageId,
+                              const std::array<std::string, 4>& args);
 
-} // namespace
+} // namespace phosphor::logging::amd

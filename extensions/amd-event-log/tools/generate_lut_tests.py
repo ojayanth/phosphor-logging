@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
 
-import json
 import argparse
+import json
 from pathlib import Path
 
 
@@ -82,13 +82,15 @@ def generate_positive_cases(lookup):
     def walk(reg, msg, node, args, depth):
 
         if is_leaf(node):
-            cases.append({
-                "registry": reg,
-                "msg": msg,
-                "args": args.copy(),
-                "afid": node["afid"],
-                "origin": node["originOfCondition"],
-            })
+            cases.append(
+                {
+                    "registry": reg,
+                    "msg": msg,
+                    "args": args.copy(),
+                    "afid": node["afid"],
+                    "origin": node["originOfCondition"],
+                }
+            )
             return
 
         for k, v in node.items():
@@ -112,6 +114,7 @@ def generate_positive_cases(lookup):
 
     return cases
 
+
 # ==========================================================
 # Negative Cases
 # ==========================================================
@@ -119,28 +122,27 @@ def generate_negative_cases(lookup, fallback):
 
     cases = []
 
-    cases.append({
-        "registry": "INVALID.REG",
-        "msg": "INVALID_MSG",
-        "args": ["", "", "", ""],
-        "afid": fallback
-    })
-
-    for reg in lookup:
-        cases.append({
-            "registry": reg,
+    # Invalid registry
+    cases.append(
+        {
+            "registry": "INVALID.REG",
             "msg": "INVALID_MSG",
             "args": ["", "", "", ""],
-            "afid": fallback
-        })
+            "afid": fallback,
+        }
+    )
 
-        for msg in lookup[reg]:
-            cases.append({
+    for reg in lookup:
+
+        # Invalid message
+        cases.append(
+            {
                 "registry": reg,
-                "msg": msg,
-                "args": ["__BAD__", "", "", ""],
-                "afid": fallback
-            })
+                "msg": "INVALID_MSG",
+                "args": ["", "", "", ""],
+                "afid": fallback,
+            }
+        )
 
     return cases
 
@@ -169,10 +171,9 @@ def generate_overlap_tests(lookup):
                         if a != b and is_overlap(a, b):
 
                             # create specific vs generic test
-                            tests.append({
-                                "pattern_big": a,
-                                "pattern_small": b
-                            })
+                            tests.append(
+                                {"pattern_big": a, "pattern_small": b}
+                            )
 
         for v in node.values():
             walk(v, path)
@@ -239,7 +240,9 @@ def emit_cpp(pos, neg, overlap, output, fallback):
             out.write("    SUCCEED();\n")
 
         for i, t in enumerate(overlap):
-            out.write(f'    ADD_FAILURE() << "Overlap detected: {t["pattern_big"]} vs {t["pattern_small"]}";\n')
+            out.write(
+                f'    ADD_FAILURE() << "Overlap detected: {t["pattern_big"]} vs {t["pattern_small"]}";\n'
+            )
 
         out.write("}\n")
 

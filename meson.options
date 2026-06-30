@@ -4,14 +4,14 @@ option(
     'amd-event-log',
     type: 'feature',
     description: 'Enable AMD Event Logging (AEL) extension',
-    value: 'disabled',
+    value: 'enabled',
 )
 
 option(
     'ael_lut_json',
-    type : 'string',
-    value : '',
-    description : 'Path to AMD Event Log LUT JSON'
+    type: 'string',
+    value: '',
+    description: 'Path to AMD Event Log LUT JSON',
 )
 
 option(
