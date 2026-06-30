@@ -1,5 +1,5 @@
-#include "amd_event_log.hpp"
-#include "lut_gen.hpp"
+#include "amd_ael_decoder.hpp"
+#include "amd_ael_lut_gen.hpp"
 
 namespace phosphor::logging::amd
 {
