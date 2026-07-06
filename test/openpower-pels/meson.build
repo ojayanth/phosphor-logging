@@ -91,6 +91,7 @@ foreach t : openpower_pels.keys()
                 libpel_deps,
                 log_manager_deps,
                 peltool_deps,
+                log_manager_ext_deps,
                 openpower_pels.get(t).get('deps', []),
             ],
             include_directories: [
