@@ -69,7 +69,9 @@ openpower_test_lib = static_library(
     libpel_sources,
     peltool_sources,
     '../common.cpp',
-    include_directories: include_directories('../../', '../../gen'),
+    include_directories: [
+        include_directories('../../', '../../gen'),
+    ] + log_manager_ext_inc,
     dependencies: [libpel_deps, peltool_deps, gtest_dep],
 )
 
@@ -91,7 +93,9 @@ foreach t : openpower_pels.keys()
                 peltool_deps,
                 openpower_pels.get(t).get('deps', []),
             ],
-            include_directories: include_directories('../../', '../../gen'),
+            include_directories: [
+                include_directories('../../', '../../gen'),
+            ] + log_manager_ext_inc,
         ),
     )
 endforeach
