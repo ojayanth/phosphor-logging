@@ -19,6 +19,8 @@ if not gtest_dep.found() or not gmock_dep.found()
     endif
 endif
 
+subdir('plugin')
+
 if get_option('openpower-pel-extension').allowed()
     subdir('openpower-pels')
 endif

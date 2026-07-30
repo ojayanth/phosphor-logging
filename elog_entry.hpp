@@ -2,6 +2,7 @@
 
 #include "config.h"
 
+#include "plugin/plugin.hpp"
 #include "xyz/openbmc_project/Logging/Entry/server.hpp"
 #include "xyz/openbmc_project/Object/Delete/server.hpp"
 #include "xyz/openbmc_project/Software/Version/server.hpp"
@@ -12,6 +13,9 @@
 #include <sdeventplus/source/event.hpp>
 #include <xyz/openbmc_project/Association/Definitions/server.hpp>
 #include <xyz/openbmc_project/Common/FilePath/server.hpp>
+
+#include <memory>
+#include <vector>
 
 namespace phosphor
 {
@@ -86,9 +90,6 @@ class Entry : public EntryIfaces
         version(fwVersion, true);
         purpose(VersionPurpose::BMC, true);
         path(filePath, true);
-
-        // Emit deferred signal.
-        this->emit_object_added();
     };
 
     /** @brief Constructor that puts an "empty" error object on the bus,
@@ -160,6 +161,19 @@ class Entry : public EntryIfaces
      */
     sdbusplus::message::unix_fd getEntry() override;
 
+    /**
+     * @brief Attach a plugin to the entry.
+     *
+     * Ownership of the plugin is transferred to the
+     * entry.
+     *
+     * @param[in] plugin Runtime plugin instance.
+     */
+    void addPlugin(std::unique_ptr<Plugin> plugin)
+    {
+        plugins.emplace_back(std::move(plugin));
+    }
+
   private:
     /** @brief This entry's associations */
     AssociationList assocs = {};
@@ -172,6 +186,15 @@ class Entry : public EntryIfaces
      *        has been returned from the getEntry D-Bus method.
      */
     std::unique_ptr<sdeventplus::source::Defer> fdCloseEventSource;
+
+    /**
+     * @brief Runtime plugin instances attached to the
+     *        log entry.
+     *
+     * Plugins are owned by the entry and remain alive
+     * for the lifetime of the entry object.
+     */
+    std::vector<std::unique_ptr<Plugin>> plugins;
 
     /**
      * @brief Closes the file descriptor passed in.

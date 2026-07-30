@@ -1,0 +1,165 @@
+#include "plugin/cper_descriptor.hpp"
+#include "plugin/cper_plugin.hpp"
+#include "plugin/plugin_registry.hpp"
+
+#include <iostream>
+
+#include <gtest/gtest.h>
+
+namespace phosphor::logging
+{
+
+/*
+ * Architecture validation test.
+ *
+ * Validates the complete plugin extension model:
+ *
+ *   Producer
+ *      ↓
+ *   Descriptor
+ *      ↓
+ *   PluginRegistry
+ *      ↓
+ *   CPER Plugin
+ *      ↓
+ *   DBus Interface Registration
+ *      ↓
+ *   Entry Object Path Extension
+ *
+ * The CPER plugin does not create a separate DBus object.
+ *
+ * Instead, it extends an existing log-entry object path:
+ *
+ *   /xyz/openbmc_project/logging/entry/<id>
+ *
+ * by attaching:
+ *
+ *   xyz.openbmc_project.Logging.Diagnostic.CPER
+ *
+ * Example CPER payload:
+ *
+ * {
+ *   "DiagnosticDataType": "CPER",
+ *   "NotificationType": "Corrected",
+ *   "SectionType": "Processor",
+ *   "ArtifactPath": "/tmp/test.cper",
+ *   "OEM":
+ *   {
+ *     "Vendor": "AMD",
+ *     "DeviceType": "GPU",
+ *     "PCIeBDF": "0000:c1:00.0",
+ *     "ErrorCategory": "RAS"
+ *   }
+ * }
+ *
+ * CPER information is divided into:
+ *
+ *   Standardized CPER metadata
+ *     - DiagnosticDataType
+ *     - NotificationType
+ *     - SectionType
+ *     - ArtifactPath
+ *
+ *   Vendor-specific metadata
+ *     - OEM
+ *
+ * OEM metadata is represented as a string containing
+ * a serialized JSON object. This allows vendors to
+ * attach additional metadata without requiring changes
+ * to the common CPER schema.
+ *
+ * Example OEM string:
+ *
+ * "{\"Vendor\":\"AMD\","
+ *  "\"DeviceType\":\"GPU\","
+ *  "\"PCIeBDF\":\"0000:c1:00.0\","
+ *  "\"ErrorCategory\":\"RAS\"}"
+ *
+ * This test validates:
+ *
+ *   1. Plugin registration
+ *   2. Registry lookup
+ *   3. Factory creation
+ *   4. DBus interface attachment
+ *   5. CPER property exposure
+ *   6. Object introspection visibility
+ *
+ * The introspection output printed by this test serves
+ * as executable documentation demonstrating how plugins
+ * extend the logging entry object model.
+ */
+TEST(CperPluginDbusTest, VerifyInterfaceAndProperties)
+{
+    auto createFunc = PluginRegistry::instance().lookup(plugin::Type::cper);
+
+    ASSERT_NE(createFunc, nullptr) << "CPER plugin registration not found";
+
+    auto bus = sdbusplus::bus::new_default();
+
+    constexpr auto* objPath = "/xyz/openbmc_project/logging/entry/999";
+
+    plugin::cper::Descriptor descriptor(
+        plugin::cper::DiagnosticDataType::cper, "Corrected", "Processor",
+        "/tmp/test.cper",
+        {
+            {"Vendor", "AMD"},
+            {"DeviceType", "GPU"},
+            {"PCIeBDF", "0000:c1:00.0"},
+            {"ErrorCategory", "RAS"},
+        });
+
+    PluginContext context{
+        .bus = bus,
+        .objectPath = objPath,
+    };
+
+    auto plugin = PluginRegistry::instance().create(context, descriptor);
+
+    ASSERT_NE(plugin, nullptr) << "Failed to create CPER plugin";
+
+    EXPECT_EQ(plugin->type(), plugin::Type::cper);
+
+    bus.process_discard();
+
+    auto method = bus.new_method_call(bus.get_unique_name().c_str(), objPath,
+                                      "org.freedesktop.DBus.Introspectable",
+                                      "Introspect");
+
+    auto reply = bus.call(method);
+
+    std::string xml;
+    reply.read(xml);
+
+    std::cout << "\n"
+              << "=====================================\n"
+              << "CPER DBUS INTROSPECTION\n"
+              << "=====================================\n"
+              << xml << "\n"
+              << "=====================================\n";
+
+    //
+    // Verify interface presence.
+    //
+    EXPECT_NE(xml.find("xyz.openbmc_project.Logging.Diagnostic.CPER"),
+              std::string::npos);
+
+    //
+    // Verify expected CPER properties.
+    //
+    EXPECT_NE(xml.find("DiagnosticDataType"), std::string::npos);
+
+    EXPECT_NE(xml.find("NotificationType"), std::string::npos);
+
+    EXPECT_NE(xml.find("SectionType"), std::string::npos);
+
+    EXPECT_NE(xml.find("ArtifactPath"), std::string::npos);
+
+    //
+    // Depending on YAML naming, generated property
+    // may appear as OEM or Oem.
+    //
+    EXPECT_TRUE(xml.find("OEM") != std::string::npos ||
+                xml.find("Oem") != std::string::npos);
+}
+
+} // namespace phosphor::logging

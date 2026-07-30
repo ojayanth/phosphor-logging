@@ -218,7 +218,9 @@ void Manager::_commit(uint64_t transactionId [[maybe_unused]],
 
 auto Manager::createEntry(std::string errMsg, Entry::Level errLvl,
                           std::map<std::string, std::string> additionalData,
-                          const FFDCEntries& ffdc) -> sdbusplus::object_path
+                          const FFDCEntries& ffdc,
+                          plugin::DescriptorList descriptors)
+    -> sdbusplus::object_path
 {
     if (!Extensions::disableDefaultLogCaps())
     {
@@ -287,6 +289,22 @@ auto Manager::createEntry(std::string errMsg, Entry::Level errLvl,
         errLvl, std::move(errMsg), std::move(additionalData),
         std::move(objects), fwVersion, getEntrySerializePath(entryId), *this);
 
+    PluginContext context{
+        .bus = busLog,
+        .objectPath = objPath,
+    };
+
+    for (auto& descriptor : descriptors)
+    {
+        auto plugin = pluginManager.create(context, *descriptor);
+
+        if (plugin)
+        {
+            e->addPlugin(std::move(plugin));
+        }
+    }
+    e->emit_object_added();
+
     serialize(*e);
     serializeJSON(*e);
 
@@ -311,7 +329,11 @@ auto Manager::createFromEvent(
     -> sdbusplus::object_path
 {
     auto [msg, level, data] = lg2::details::extractEvent(std::move(event));
-    return this->createEntry(msg, level, std::move(data));
+
+    plugin::DescriptorList descriptors{};
+
+    return this->createEntry(std::move(msg), level, std::move(data),
+                             FFDCEntries{}, {});
 }
 
 bool Manager::isQuiesceOnErrorEnabled()

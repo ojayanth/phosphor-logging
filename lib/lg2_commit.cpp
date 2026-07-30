@@ -106,10 +106,13 @@ static auto data_from_json(sdbusplus::exception::generated_event_base& t)
     return result;
 }
 
-auto extractEvent(sdbusplus::exception::generated_event_base&& t)
-    -> std::tuple<std::string, Entry::Level, std::map<std::string, std::string>>
+auto extractEvent(sdbusplus::exception::generated_event_base&& t) -> EventInfo
 {
-    return {t.name(), severity_from_syslog(t.severity()), data_from_json(t)};
+    return {
+        .message = t.name(),
+        .severity = severity_from_syslog(t.severity()),
+        .additionalData = data_from_json(t),
+    };
 }
 
 } // namespace details
