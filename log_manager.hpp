@@ -5,6 +5,7 @@
 #include "bmc_pos_mgr.hpp"
 #include "elog_block.hpp"
 #include "elog_entry.hpp"
+#include "plugin/plugin_descriptor.hpp"
 #include "xyz/openbmc_project/Logging/Internal/Manager/server.hpp"
 
 #include <phosphor-logging/log.hpp>
@@ -281,16 +282,21 @@ class Manager : public details::ServerObject<details::ManagerIface>
 
     /** @brief Common wrapper for creating an Entry object
      *
-     * @param[in] errMsg - The error exception message associated with the
-     *                     error log to be committed.
-     * @param[in] errLvl - level of the error
-     * @param[in] additionalData - The AdditionalData property for the error
-     * @param[in] ffdc - A vector of FFDC file info. Defaults to an empty
-     * vector.
+     * @param[in] errMsg - The error exception message associated with
+     *                     the error log to be committed.
+     * @param[in] errLvl - The error severity level.
+     * @param[in] additionalData - The AdditionalData property for
+     *                             the error.
+     * @param[in] ffdc - A vector of FFDC file information.
+     *                   Defaults to an empty vector.
+     * @param[in] descriptors - Plugin creation descriptors associated
+     *                          with the error log. Defaults to an
+     *                          empty list.
      */
     auto createEntry(std::string errMsg, Entry::Level errLvl,
                      std::map<std::string, std::string> additionalData,
-                     const FFDCEntries& ffdc = FFDCEntries{})
+                     const FFDCEntries& ffdc = FFDCEntries{},
+                     plugin::DescriptorList descriptors = {})
         -> sdbusplus::object_path;
 
     /** @brief Notified on entry property changes

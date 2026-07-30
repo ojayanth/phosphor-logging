@@ -218,8 +218,12 @@ void Manager::_commit(uint64_t transactionId [[maybe_unused]],
 
 auto Manager::createEntry(std::string errMsg, Entry::Level errLvl,
                           std::map<std::string, std::string> additionalData,
-                          const FFDCEntries& ffdc) -> sdbusplus::object_path
+                          const FFDCEntries& ffdc,
+                          plugin::DescriptorList descriptors)
+    -> sdbusplus::object_path
 {
+    (void)descriptors;
+
     if (!Extensions::disableDefaultLogCaps())
     {
         if (errLvl < Entry::sevLowerLimit)
@@ -311,7 +315,11 @@ auto Manager::createFromEvent(
     -> sdbusplus::object_path
 {
     auto [msg, level, data] = lg2::details::extractEvent(std::move(event));
-    return this->createEntry(msg, level, std::move(data));
+
+    plugin::DescriptorList descriptors{};
+
+    return this->createEntry(std::move(msg), level, std::move(data),
+                             FFDCEntries{}, std::move(descriptors));
 }
 
 bool Manager::isQuiesceOnErrorEnabled()
