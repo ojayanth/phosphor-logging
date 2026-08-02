@@ -5,6 +5,9 @@
 #include "bmc_pos_mgr.hpp"
 #include "elog_block.hpp"
 #include "elog_entry.hpp"
+#include "plugin/cper_plugin.hpp"
+#include "plugin/plugin_manager.hpp"
+#include "plugin/plugin_registry.hpp"
 #include "xyz/openbmc_project/Logging/Internal/Manager/server.hpp"
 
 #include <phosphor-logging/log.hpp>
@@ -71,19 +74,29 @@ class Manager : public details::ServerObject<details::ManagerIface>
     virtual ~Manager();
 
     /** @brief Constructor to put object onto bus at a dbus path.
-     *  @param[in] bus - Bus to attach to.
-     *  @param[in] path - Path to attach at.
+     *
+     * Initializes the logging manager along with the runtime
+     * plugin infrastructure used to create log-entry plugins.
+     *
+     * Built-in plugin implementations are registered during
+     * construction and are available for future log entry
+     * processing.
+     *
+     * @param[in] bus Bus to attach to.
+     * @param[in] objPath D-Bus object path.
      */
     Manager(sdbusplus::bus_t& bus, const char* objPath) :
         details::ServerObject<details::ManagerIface>(bus, objPath), busLog(bus),
-        entryId(0), fwVersion(readFWVersion()),
-        event(sdeventplus::Event::get_default())
+        entryId(0), fwVersion(readFWVersion()), pluginRegistry(),
+        pluginManager(pluginRegistry), event(sdeventplus::Event::get_default())
     {
+        plugin::cper::registerPlugin(pluginRegistry);
+
         if constexpr (REDUNDANT_BMC)
         {
             bmcPosMgr = std::make_unique<BMCPosMgr>();
         }
-    };
+    }
 
     /*
      * @fn commit()
@@ -156,6 +169,26 @@ class Manager : public details::ServerObject<details::ManagerIface>
     int getEntryCallbackSize()
     {
         return propChangedEntryCallback.size();
+    }
+
+    /**
+     * @brief Return the plugin manager.
+     *
+     * @return Reference to the runtime plugin manager.
+     */
+    PluginManager& getPluginManager()
+    {
+        return pluginManager;
+    }
+
+    /**
+     * @brief Return the plugin registry.
+     *
+     * @return Reference to the plugin registry.
+     */
+    PluginRegistry& getPluginRegistry()
+    {
+        return pluginRegistry;
     }
 
     /**
@@ -353,6 +386,12 @@ class Manager : public details::ServerObject<details::ManagerIface>
 
     /** @brief The BMC firmware version */
     const std::string fwVersion;
+
+    /** @brief Registered plugin implementations. */
+    PluginRegistry pluginRegistry;
+
+    /** @brief Runtime plugin manager. */
+    PluginManager pluginManager;
 
     /** @brief Array of blocking errors */
     std::vector<std::unique_ptr<Block>> blockingErrors;
