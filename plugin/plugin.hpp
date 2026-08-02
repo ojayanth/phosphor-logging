@@ -4,7 +4,9 @@
 
 #include <sdbusplus/bus.hpp>
 
+#include <memory>
 #include <string>
+#include <vector>
 
 namespace phosphor::logging
 {
@@ -44,5 +46,10 @@ class Plugin
      */
     virtual plugin::Type type() const = 0;
 };
+
+/**
+ * @brief Collection of runtime plugins associated with a log entry.
+ */
+using PluginList = std::vector<std::unique_ptr<Plugin>>;
 
 } // namespace phosphor::logging
