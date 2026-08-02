@@ -42,7 +42,8 @@ class Descriptor : public phosphor::logging::plugin::Descriptor
      */
     Descriptor(DiagnosticDataType diagnosticDataType,
                std::string notificationType, std::string sectionType,
-               int cperFd, nlohmann::json oemMetadata = {});
+               int cperFd,
+               nlohmann::json oemMetadata = nlohmann::json::object());
 
     /**
      * Return the plugin type.
