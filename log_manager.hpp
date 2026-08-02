@@ -6,6 +6,8 @@
 #include "elog_block.hpp"
 #include "elog_entry.hpp"
 #include "plugin/cper_plugin.hpp"
+#include "plugin/plugin.hpp"
+#include "plugin/plugin_descriptor.hpp"
 #include "plugin/plugin_manager.hpp"
 #include "plugin/plugin_registry.hpp"
 #include "xyz/openbmc_project/Logging/Internal/Manager/server.hpp"
@@ -371,6 +373,21 @@ class Manager : public details::ServerObject<details::ManagerIface>
      */
     void errorFileChanged(sdeventplus::source::IO& io, int fd,
                           uint32_t revents);
+
+    /**
+     * @brief Create runtime plugins for a log entry.
+     *
+     * Creates plugin instances from the supplied plugin
+     * descriptors and associates them with the specified
+     * log entry object path.
+     *
+     * @param[in] objectPath Log entry object path.
+     * @param[in] descriptors Plugin descriptors.
+     *
+     * @return Runtime plugin instances.
+     */
+    PluginList createPlugins(const std::string& objectPath,
+                             const plugin::DescriptorList& descriptors);
 
     /** @brief Persistent sdbusplus DBus bus connection. */
     sdbusplus::bus_t& busLog;
