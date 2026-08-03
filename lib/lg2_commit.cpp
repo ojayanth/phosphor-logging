@@ -14,6 +14,20 @@
 
 namespace lg2
 {
+namespace
+{
+
+auto pluginInfoFromEvent(
+    const sdbusplus::exception::generated_event_base& event)
+    -> std::vector<lg2::details::PluginInfo>
+{
+    (void)event;
+
+    return {};
+}
+
+} // namespace
+
 namespace details
 {
 
@@ -113,7 +127,7 @@ auto extractEvent(sdbusplus::exception::generated_event_base&& event)
         .message = event.name(),
         .level = severity_from_syslog(event.severity()),
         .additionalData = data_from_json(event),
-        .plugins = {},
+        .plugins = pluginInfoFromEvent(event),
     };
 }
 

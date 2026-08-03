@@ -32,10 +32,12 @@ install_headers(
 install_headers(
     'lg2/concepts.hpp',
     'lg2/conversion.hpp',
+    'lg2/cper.hpp',
     'lg2/flags.hpp',
     'lg2/header.hpp',
     'lg2/level.hpp',
     'lg2/logger.hpp',
+    'lg2/plugin.hpp',
     subdir: 'phosphor-logging/lg2',
 )
 
