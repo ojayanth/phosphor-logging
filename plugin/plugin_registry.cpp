@@ -24,6 +24,17 @@ const PluginFactory* PluginRegistry::lookup(plugin::Type type) const
 }
 
 std::unique_ptr<plugin::Descriptor> PluginRegistry::createDescriptor(
+    const plugin::Info& info) const
+{
+    if (info.type == "cper")
+    {
+        return createDescriptor(plugin::Type::cper, info);
+    }
+
+    return nullptr;
+}
+
+std::unique_ptr<plugin::Descriptor> PluginRegistry::createDescriptor(
     plugin::Type type, const plugin::Info& info) const
 {
     auto factory = lookup(type);
