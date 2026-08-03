@@ -19,6 +19,13 @@ std::unique_ptr<phosphor::logging::Plugin> Factory::create(
                                     static_cast<const Descriptor&>(descriptor));
 }
 
+std::unique_ptr<plugin::Descriptor> Factory::createDescriptor(
+    const plugin::Info& info) const
+{
+    (void)info;
+    return nullptr;
+}
+
 Plugin::Plugin(const PluginContext& context, const Descriptor& descriptor) :
     CperIface(context.bus, context.objectPath.c_str()),
     cperFd(descriptor.cperFd())

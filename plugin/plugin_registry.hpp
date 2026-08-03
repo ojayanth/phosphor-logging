@@ -44,6 +44,17 @@ class PluginRegistry
      */
     const PluginFactory* lookup(plugin::Type type) const;
 
+    /**
+     * @brief Create a plugin descriptor.
+     *
+     * @param[in] type Plugin type.
+     * @param[in] info Plugin request information.
+     *
+     * @return Plugin descriptor.
+     */
+    std::unique_ptr<plugin::Descriptor> createDescriptor(
+        plugin::Type type, const plugin::Info& info) const;
+
   private:
     /** Registered plugin factories. */
     std::unordered_map<plugin::Type, std::unique_ptr<PluginFactory>> registry;

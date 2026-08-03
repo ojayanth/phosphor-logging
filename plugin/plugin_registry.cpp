@@ -23,4 +23,17 @@ const PluginFactory* PluginRegistry::lookup(plugin::Type type) const
     return it->second.get();
 }
 
+std::unique_ptr<plugin::Descriptor> PluginRegistry::createDescriptor(
+    plugin::Type type, const plugin::Info& info) const
+{
+    auto factory = lookup(type);
+
+    if (factory == nullptr)
+    {
+        return nullptr;
+    }
+
+    return factory->createDescriptor(info);
+}
+
 } // namespace phosphor::logging
