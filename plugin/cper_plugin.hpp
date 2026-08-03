@@ -95,6 +95,16 @@ class Factory : public phosphor::logging::PluginFactory
     std::unique_ptr<phosphor::logging::Plugin> create(
         const PluginContext& context,
         const plugin::Descriptor& descriptor) const override;
+
+    /**
+     * @brief Create a CPER descriptor.
+     *
+     * @param[in] info Plugin request information.
+     *
+     * @return CPER descriptor.
+     */
+    std::unique_ptr<plugin::Descriptor> createDescriptor(
+        const plugin::Info& info) const override;
 };
 
 /**
