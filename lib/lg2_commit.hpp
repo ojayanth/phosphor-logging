@@ -16,7 +16,7 @@ using Entry = sdbusplus::client::xyz::openbmc_project::logging::Entry<>;
 using PluginInfo = phosphor::logging::plugin::Info;
 
 /**
- * Information extracted from a generated event.
+ * @brief Information extracted from a generated event.
  */
 struct EventInfo
 {
@@ -29,13 +29,22 @@ struct EventInfo
     /** Event metadata. */
     std::map<std::string, std::string> additionalData;
 
-    /** Optional plugin requests associated with the event. */
+    /**
+     * @brief Requested plugins.
+     *
+     * Plugins are attached to an event through
+     * Event::extend() and consumed during log creation.
+     *
+     * The list may be empty if the event does not
+     * request any plugins.
+     */
     std::vector<PluginInfo> plugins;
 };
 
-/** Extract information from a generated event.
+/**
+ * @brief Extract information from a generated event.
  *
- * @param[in] event - The event to extract data from.
+ * @param[in] event Event to extract information from.
  *
  * @return Extracted event information.
  */
