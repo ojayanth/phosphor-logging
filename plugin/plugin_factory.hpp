@@ -2,6 +2,7 @@
 
 #include "plugin/plugin.hpp"
 #include "plugin/plugin_descriptor.hpp"
+#include "plugin/plugin_info.hpp"
 
 #include <memory>
 
@@ -48,6 +49,19 @@ class PluginFactory
     virtual std::unique_ptr<Plugin> create(
         const PluginContext& context,
         const plugin::Descriptor& descriptor) const = 0;
+
+    /**
+     * @brief Create a plugin descriptor.
+     *
+     * Converts plugin request information into a
+     * runtime descriptor.
+     *
+     * @param[in] info Plugin request information.
+     *
+     * @return Plugin descriptor.
+     */
+    virtual std::unique_ptr<plugin::Descriptor> createDescriptor(
+        const plugin::Info& info) const = 0;
 };
 
 } // namespace phosphor::logging

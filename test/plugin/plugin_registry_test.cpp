@@ -12,9 +12,20 @@ namespace
 class TestFactory : public PluginFactory
 {
   public:
-    std::unique_ptr<Plugin> create(const PluginContext&,
-                                   const plugin::Descriptor&) const override
+    std::unique_ptr<plugin::Descriptor> createDescriptor(
+        const plugin::Info& info) const override
     {
+        (void)info;
+        return nullptr;
+    }
+
+    std::unique_ptr<Plugin> create(
+        const PluginContext& context,
+        const plugin::Descriptor& descriptor) const override
+    {
+        (void)context;
+        (void)descriptor;
+
         return nullptr;
     }
 };
@@ -36,6 +47,23 @@ TEST(PluginRegistryTest, LookupUnknownFactory)
     PluginRegistry registry;
 
     EXPECT_EQ(registry.lookup(plugin::Type::cper), nullptr);
+}
+
+TEST(PluginRegistryTest, CreateDescriptor)
+{
+    PluginRegistry registry;
+
+    registry.registerPlugin(plugin::Type::cper,
+                            std::make_unique<TestFactory>());
+
+    plugin::Info info{
+        .type = "cper",
+        .data = {},
+    };
+
+    auto descriptor = registry.createDescriptor(plugin::Type::cper, info);
+
+    EXPECT_EQ(descriptor, nullptr);
 }
 
 } // namespace phosphor::logging
