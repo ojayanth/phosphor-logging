@@ -8,6 +8,7 @@
 #include "plugin/cper_plugin.hpp"
 #include "plugin/plugin.hpp"
 #include "plugin/plugin_descriptor.hpp"
+#include "plugin/plugin_info.hpp"
 #include "plugin/plugin_manager.hpp"
 #include "plugin/plugin_registry.hpp"
 #include "xyz/openbmc_project/Logging/Internal/Manager/server.hpp"
@@ -388,6 +389,19 @@ class Manager : public details::ServerObject<details::ManagerIface>
      */
     PluginList createPlugins(const std::string& objectPath,
                              const plugin::DescriptorList& descriptors);
+
+    /**
+     * @brief Generate plugin descriptors.
+     *
+     * Uses registered plugin factories to translate
+     * plugin requests into runtime descriptors.
+     *
+     * @param[in] plugins Plugin request information.
+     *
+     * @return Generated plugin descriptors.
+     */
+    plugin::DescriptorList buildPluginDescriptors(
+        const std::vector<plugin::Info>& plugins) const;
 
     /** @brief Persistent sdbusplus DBus bus connection. */
     sdbusplus::bus_t& busLog;

@@ -314,6 +314,10 @@ auto Manager::createFromEvent(
 {
     auto eventInfo = lg2::details::extractEvent(std::move(event));
 
+    auto descriptors = buildPluginDescriptors(eventInfo.plugins);
+
+    (void)descriptors;
+
     return this->createEntry(eventInfo.message, eventInfo.level,
                              std::move(eventInfo.additionalData));
 }
@@ -1051,6 +1055,27 @@ PluginList Manager::createPlugins(const std::string& objectPath,
     }
 
     return plugins;
+}
+
+auto Manager::buildPluginDescriptors(
+    const std::vector<plugin::Info>& plugins) const -> plugin::DescriptorList
+{
+    plugin::DescriptorList descriptors;
+
+    for (const auto& info : plugins)
+    {
+        auto descriptor = pluginRegistry.createDescriptor(info);
+
+        if (descriptor == nullptr)
+        {
+            lg2::warning("Unknown plugin type '{TYPE}'", "TYPE", info.type);
+            continue;
+        }
+
+        descriptors.emplace_back(std::move(descriptor));
+    }
+
+    return descriptors;
 }
 
 } // namespace internal

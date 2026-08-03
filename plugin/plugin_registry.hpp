@@ -47,6 +47,21 @@ class PluginRegistry
     /**
      * @brief Create a plugin descriptor.
      *
+     * Resolves the plugin type specified by the plugin
+     * request and invokes the corresponding registered
+     * plugin factory to generate a runtime descriptor.
+     *
+     * @param[in] info Plugin request information.
+     *
+     * @return Generated plugin descriptor or nullptr
+     *         if the plugin type is not supported.
+     */
+    std::unique_ptr<plugin::Descriptor> createDescriptor(
+        const plugin::Info& info) const;
+
+    /**
+     * @brief Create a plugin descriptor.
+     *
      * @param[in] type Plugin type.
      * @param[in] info Plugin request information.
      *
