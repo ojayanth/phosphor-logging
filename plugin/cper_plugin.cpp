@@ -1,5 +1,7 @@
 #include "plugin/cper_plugin.hpp"
 
+#include <nlohmann/json.hpp>
+
 #include <memory>
 #include <stdexcept>
 
@@ -22,8 +24,17 @@ std::unique_ptr<phosphor::logging::Plugin> Factory::create(
 std::unique_ptr<plugin::Descriptor> Factory::createDescriptor(
     const plugin::Info& info) const
 {
-    (void)info;
-    return nullptr;
+    auto notificationType = info.data.at(cper::notificationTypeKey);
+
+    auto sectionType = info.data.at(cper::sectionTypeKey);
+
+    auto cperFd = std::stoi(info.data.at(cper::cperFdKey));
+
+    auto oem = nlohmann::json::parse(info.data.at(cper::oemKey));
+
+    return std::make_unique<Descriptor>(
+        DiagnosticDataType::CPER, std::move(notificationType),
+        std::move(sectionType), cperFd, std::move(oem));
 }
 
 Plugin::Plugin(const PluginContext& context, const Descriptor& descriptor) :

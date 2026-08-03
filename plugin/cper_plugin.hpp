@@ -14,6 +14,12 @@ namespace phosphor::logging::plugin::cper
 using CperIface =
     sdbusplus::server::xyz::openbmc_project::logging::diagnostic::CPER;
 
+inline constexpr auto pluginType = "cper";
+inline constexpr auto notificationTypeKey = "notificationType";
+inline constexpr auto sectionTypeKey = "sectionType";
+inline constexpr auto cperFdKey = "cperFd";
+inline constexpr auto oemKey = "oem";
+
 /**
  * @class Plugin
  *
