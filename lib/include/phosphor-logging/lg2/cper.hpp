@@ -58,4 +58,45 @@ struct CperInfo
     std::map<std::string, std::string> oem;
 };
 
+namespace cper
+{
+
+inline constexpr auto pluginType = "cper";
+
+inline constexpr auto notificationTypeKey = "notificationType";
+
+inline constexpr auto sectionTypeKey = "sectionType";
+
+inline constexpr auto cperFdKey = "cperFd";
+
+} // namespace cper
+
+/**
+ * @brief Convert CPER metadata into a plugin request.
+ *
+ * Serializes producer supplied CPER metadata into the
+ * plugin request format consumed by the logging
+ * framework.
+ */
+inline auto toPluginInfo(CperInfo&& info) -> phosphor::logging::plugin::Info
+{
+    phosphor::logging::plugin::Info pluginInfo;
+
+    pluginInfo.type = cper::pluginType;
+
+    pluginInfo.data.emplace(cper::notificationTypeKey,
+                            std::move(info.notificationType));
+
+    pluginInfo.data.emplace(cper::sectionTypeKey, std::move(info.sectionType));
+
+    pluginInfo.data.emplace(cper::cperFdKey, std::to_string(info.cperFd));
+
+    for (auto& [key, value] : info.oem)
+    {
+        pluginInfo.data.emplace(std::move(key), std::move(value));
+    }
+
+    return pluginInfo;
+}
+
 } // namespace lg2

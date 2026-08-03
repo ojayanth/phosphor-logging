@@ -1,5 +1,7 @@
 #include "plugin/cper_plugin.hpp"
 
+#include <phosphor-logging/lg2/cper.hpp>
+
 #include <memory>
 #include <stdexcept>
 
@@ -22,8 +24,23 @@ std::unique_ptr<phosphor::logging::Plugin> Factory::create(
 std::unique_ptr<plugin::Descriptor> Factory::createDescriptor(
     const plugin::Info& info) const
 {
-    (void)info;
-    return nullptr;
+    auto notificationType = info.data.at(lg2::cper::notificationTypeKey);
+
+    auto sectionType = info.data.at(lg2::cper::sectionTypeKey);
+
+    auto cperFd = std::stoi(info.data.at(lg2::cper::cperFdKey));
+
+    auto oem = info.data;
+
+    oem.erase(lg2::cper::notificationTypeKey);
+
+    oem.erase(lg2::cper::sectionTypeKey);
+
+    oem.erase(lg2::cper::cperFdKey);
+
+    return std::make_unique<Descriptor>(
+        DiagnosticDataType::CPER, std::move(notificationType),
+        std::move(sectionType), cperFd, std::move(oem));
 }
 
 Plugin::Plugin(const PluginContext& context, const Descriptor& descriptor) :
