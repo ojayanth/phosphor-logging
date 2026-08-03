@@ -222,8 +222,6 @@ auto Manager::createEntry(std::string errMsg, Entry::Level errLvl,
                           plugin::DescriptorList descriptors)
     -> sdbusplus::object_path
 {
-    (void)descriptors;
-
     if (!Extensions::disableDefaultLogCaps())
     {
         if (errLvl < Entry::sevLowerLimit)
@@ -285,11 +283,14 @@ auto Manager::createEntry(std::string errMsg, Entry::Level errLvl,
     auto additionalDataVec = util::additional_data::combine(additionalData);
     processMetadata(errMsg, additionalDataVec, objects);
 
+    auto plugins = createPlugins(objPath, descriptors);
+
     auto e = std::make_unique<Entry>(
         busLog, objPath, entryId,
         ms, // Milliseconds since 1970
         errLvl, std::move(errMsg), std::move(additionalData),
-        std::move(objects), fwVersion, getEntrySerializePath(entryId), *this);
+        std::move(objects), fwVersion, getEntrySerializePath(entryId), *this,
+        std::move(plugins));
 
     serialize(*e);
     serializeJSON(*e);
