@@ -72,6 +72,6 @@ option(
 option(
     'runtime-metadata-plugin',
     type: 'string',
-    value: '',
+    value: 'xyz.openbmc_project.Logging.Extension.CPERProcessed',
     description: 'Plugin interface used for runtime metadata',
 )
