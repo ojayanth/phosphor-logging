@@ -77,4 +77,13 @@ void registerPlugin(PluginRegistry& registry)
     registry.registerPlugin(cper::interface, std::make_unique<Factory>());
 }
 
+nlohmann::json Factory::buildPayload(const nlohmann::json& metadata) const
+{
+    auto payload = nlohmann::json::object();
+
+    payload[oemKey] = metadata;
+
+    return payload;
+}
+
 } // namespace phosphor::logging::plugin::cper
