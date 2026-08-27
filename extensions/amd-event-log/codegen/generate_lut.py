@@ -30,20 +30,27 @@ def parse_args():
 def is_leaf(node):
     return (
         isinstance(node, dict)
-        and "afid" in node
-        and "originOfCondition" in node
+        and not any(isinstance(v, dict) for v in node.values())
     )
 
 
 def validate_leaf(node, path):
-    # Validate AFID
+    # Validate afid presence
+    if "afid" not in node:
+        raise ValueError(f"Missing 'afid' at {path}")
+
+    # Validate AFID type
     if not isinstance(node["afid"], int):
         raise ValueError(f"afid must be int at {path}")
 
     if node["afid"] < 0:
         raise ValueError(f"afid must be non-negative at {path}")
 
-    # Validate originOfCondition
+    # Validate originOfCondition presence
+    if "originOfCondition" not in node:
+        raise ValueError(f"Missing 'originOfCondition' at {path}")
+
+    # Validate originOfCondition type
     if not isinstance(node["originOfCondition"], str):
         raise ValueError(f"originOfCondition must be string at {path}")
 
@@ -58,6 +65,78 @@ def validate_leaf(node, path):
         if not origin:
             raise ValueError(f"Empty originOfCondition entry at {path}")
 
+    if len(origins) != len(set(origins)):
+        raise ValueError(
+            f"Duplicate originOfCondition entries at {path}: {origins}"
+        )
+
+
+def match_pattern(value, pattern):
+    if pattern == "*":
+        return True
+
+    idx = pattern.find("*")
+
+    if idx == -1:
+        return value == pattern
+
+    prefix = pattern[:idx]
+    suffix = pattern[idx + 1:]
+
+    if len(value) < len(prefix) + len(suffix):
+        return False
+
+    return (
+        value.startswith(prefix)
+        and value.endswith(suffix)
+    )
+
+
+def patterns_overlap(a, b):
+
+    if a == b:
+        return True
+
+    if "*" not in a and "*" not in b:
+        return False
+
+    if "*" in a and match_pattern(b, a):
+        return True
+
+    if "*" in b and match_pattern(a, b):
+        return True
+
+    return False
+
+
+def check_overlap(patterns, path):
+
+    expanded = []
+
+    for p in patterns:
+        expanded.extend(split_patterns(p))
+
+    for i in range(len(expanded)):
+        for j in range(i + 1, len(expanded)):
+
+            a = expanded[i]
+            b = expanded[j]
+
+            if patterns_overlap(a, b):
+                raise ValueError(
+                    f"Overlapping patterns: '{a}' and '{b}' at {path}"
+                )
+
+
+def validate_pattern(pattern, path):
+    count = pattern.count("*")
+
+    if count > 1:
+        raise ValueError(
+            f"Pattern '{pattern}' at {path} contains {count} wildcards. "
+            f"Only one '*' per pattern token is supported."
+        )
+
 
 def validate_node(node, path="root"):
     if is_leaf(node):
@@ -67,15 +146,36 @@ def validate_node(node, path="root"):
     if not isinstance(node, dict):
         raise ValueError(f"Invalid node at {path}")
 
+    _, raw_patterns = zip(
+        *[split_keyword_pattern(k) for k in node.keys()]
+    )
+
+    check_overlap(list(raw_patterns), path)
+
     for k, v in node.items():
 
         if "=" not in k:
             raise ValueError(f"Missing keyword prefix at {path}->{k}")
 
+        _, raw_pattern = split_keyword_pattern(k)
+
+        for token in split_patterns(raw_pattern):
+            if not token:
+                raise ValueError(
+                    f"Empty pattern token in key '{k}' at {path}"
+                )
+            validate_pattern(token, f"{path}->{k}")
+
         validate_node(v, f"{path}->{k}")
 
 
 def validate_structure(lookup):
+    if not lookup:
+        raise ValueError("Invalid LUT: lookup must contain at least one message entry")
+
+    if not isinstance(lookup, dict):
+        raise ValueError("Invalid LUT: lookup must be a dictionary")
+
     for message, message_val in lookup.items():
 
         if is_leaf(message_val):
@@ -177,9 +277,12 @@ def generate(data, out_path, input_file):
         )
 
         out.write("#pragma once\n\n")
+        out.write("#include <map>\n")
+        out.write("#include <vector>\n")
+        out.write("#include <string>\n")
         out.write("#include <cstdint>\n")
         out.write("#include <string_view>\n")
-        out.write("#include <vector>\n\n")
+        out.write("#include <phosphor-logging/lg2.hpp>\n\n")
 
         out.write(
             "struct AFIDResult { "
@@ -198,7 +301,10 @@ def generate(data, out_path, input_file):
         out.write("    auto pre=p.substr(0,i);\n")
         out.write("    auto suf=p.substr(i+1);\n")
         out.write(
-            "    if(!pre.empty() && s.substr(0, pre.size())!=pre) return false;\n"
+            "    if(s.size()<pre.size()+suf.size()) return false;\n"
+        )
+        out.write(
+            "    if(!pre.empty() && s.substr(0,pre.size())!=pre) return false;\n"
         )
         out.write(
             "    if(!suf.empty() && s.substr(s.size()-suf.size())!=suf) return false;\n"
@@ -215,30 +321,16 @@ def generate(data, out_path, input_file):
         out.write("}\n\n")
 
         out.write(
-            "inline std::string_view getValue(\n"
-            "    const std::vector<std::string>& additionalData,\n"
+            "inline std::string_view getMapValue(\n"
+            "    const std::map<std::string, std::string>& additionalData,\n"
             "    std::string_view key)\n"
             "{\n"
-            "    for (const auto& item : additionalData)\n"
+            "    auto it = additionalData.find(std::string(key));\n"
+            "    if(it == additionalData.end())\n"
             "    {\n"
-            "        auto pos = item.find('=');\n"
-            "\n"
-            "        if (pos == std::string::npos)\n"
-            "        {\n"
-            "            continue;\n"
-            "        }\n"
-            "\n"
-            "        std::string_view k(item.data(), pos);\n"
-            "\n"
-            "        if (k == key)\n"
-            "        {\n"
-            "            return std::string_view(\n"
-            "                item.data() + pos + 1,\n"
-            "                item.size() - pos - 1);\n"
-            "        }\n"
+            "        return {};\n"
             "    }\n"
-            "\n"
-            "    return {};\n"
+            "    return it->second;\n"
             "}\n\n"
         )
 
@@ -246,10 +338,17 @@ def generate(data, out_path, input_file):
 
         # ===== API =====
 
-        out.write("constexpr AFIDResult lookupAFID(\n")
+        out.write("inline AFIDResult lookupAFID(\n")
         out.write("    std::string_view message,\n")
-        out.write("    const std::vector<std::string>& additionalData)\n")
+        out.write("    const std::map<std::string, std::string>& additionalData)\n")
         out.write("{\n")
+        
+        out.write(
+            "    if(message.empty()){\n"
+            '       lg2::warning("[AEL] Empty message string passed to lookupAFID.");\n'
+            f"       return {{ {fallback}, {{}} }};\n"
+            "    }\n\n"
+        )
 
         # Emit tree
         def emit(node, indent):
@@ -275,10 +374,10 @@ def generate(data, out_path, input_file):
                 keyword, pattern = split_keyword_pattern(k)
 
                 arr = pool.get(split_patterns(pattern))
-
+                
                 out.write(
                     f"{ind}if(matchAny("
-                    f'getValue(additionalData, "{escape(keyword)}"), '
+                    f'getMapValue(additionalData, "{escape(keyword)}"), '
                     f"{arr})){{\n"
                 )
 
@@ -293,6 +392,7 @@ def generate(data, out_path, input_file):
 
             out.write("    }\n")
 
+        out.write(f'    lg2::warning("[AEL] No match found in LUT.");\n')
         out.write(f"    return {{ {fallback}, {{}} }};\n")
         out.write("}\n")
 
@@ -311,6 +411,7 @@ if __name__ == "__main__":
     out_file = Path(args.output)
     out_file.parent.mkdir(parents=True, exist_ok=True)
 
-    generate(data, out_file, args.input)
+    input_file = Path(args.input).name
+    generate(data, out_file, input_file)
 
     print(f"[AEL] LUT generated: {out_file}")
