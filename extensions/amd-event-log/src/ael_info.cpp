@@ -17,13 +17,8 @@ AELInfo AELInfoProvider::get() const
 
     auto afidInfo = lookupAFID(msg, additionalData);
 
-    if (!afidInfo)
-    {
-        return info;
-    }
-
-    info.afid = afidInfo->afid;
-    info.fruList = afidInfo->frus;
+    info.afid = afidInfo.afid;
+    info.fruList = afidInfo.frus;
 
     return info;
 }

@@ -33,7 +33,6 @@ def is_leaf(node):
         and not any(isinstance(v, dict) for v in node.values())
     )
 
-
 def validate_leaf(node, path):
     # Validate afid presence
     if "afid" not in node:
@@ -68,6 +67,39 @@ def validate_leaf(node, path):
     if len(origins) != len(set(origins)):
         raise ValueError(
             f"Duplicate originOfCondition entries at {path}: {origins}"
+        )
+
+    # Validate description presence
+    if "description" not in node:
+        raise ValueError(f"Missing 'description' at {path}")
+
+    if not isinstance(node["description"], str):
+        raise ValueError(f"description must be string at {path}")
+
+    if not node["description"].strip():
+        raise ValueError(f"Empty description at {path}")
+
+    # Validate redfishMapping presence
+    if "redfishMapping" not in node:
+        raise ValueError(f"Missing 'redfishMapping' at {path}")
+
+    if not isinstance(node["redfishMapping"], str):
+        raise ValueError(f"redfishMapping must be string at {path}")
+
+    redfishMappings = [r.strip() for r in node["redfishMapping"].split(",")]
+
+    if not redfishMappings:
+        raise ValueError(
+            f"redfishMapping must contain at least one path at {path}"
+        )
+
+    for mapping in redfishMappings:
+        if not mapping:
+            raise ValueError(f"Empty redfishMapping entry at {path}")
+
+    if len(redfishMappings) != len(set(redfishMappings)):
+        raise ValueError(
+            f"Duplicate redfishMapping entries at {path}: {redfishMappings}"
         )
 
 
@@ -192,6 +224,30 @@ def validate_json(data):
 
     validate_structure(data["lookup"])
 
+    if "fallthrough_afid" not in data:
+        raise ValueError("Missing 'fallthrough_afid'")
+
+    if not isinstance(data["fallthrough_afid"], int):
+        raise ValueError("'fallthrough_afid' must be integer")
+
+    if "rackUnitPosition" not in data:
+        raise ValueError("Missing 'rackUnitPosition'")
+
+    if not isinstance(data["rackUnitPosition"], str):
+        raise ValueError("'rackUnitPosition' must be string")
+
+    if not data["rackUnitPosition"].strip():
+        raise ValueError("'rackUnitPosition' must not be empty")
+
+    if "schema" not in data:
+        raise ValueError("Missing 'schema'")
+
+    if not isinstance(data["schema"], str):
+        raise ValueError("'schema' must be string")
+
+    if not data["schema"].strip():
+        raise ValueError("'schema' must not be empty")
+
 
 # ==========================================================
 # Helpers
@@ -245,6 +301,8 @@ class PatternPool:
 def generate(data, out_path, input_file):
     lookup = data["lookup"]
     fallback = int(data.get("fallthrough_afid", 0))
+    rack_unit_position = data.get("rackUnitPosition", "")
+    schema = data.get("schema", "")
 
     pool = PatternPool()
 
@@ -284,11 +342,46 @@ def generate(data, out_path, input_file):
         out.write("#include <string_view>\n")
         out.write("#include <phosphor-logging/lg2.hpp>\n\n")
 
+        # ===== Top-level constants =====
         out.write(
-            "struct AFIDResult { "
-            "uint64_t afid; "
-            "std::vector<std::string_view> origins; "
+            f'constexpr std::string_view kRackUnitPosition = '
+            f'"{escape(rack_unit_position)}";\n\n'
+        )
+        out.write(
+            f'constexpr std::string_view kSchema = '
+            f'"{escape(schema)}";\n\n'
+        )
+        out.write(
+            f'constexpr uint64_t kFallthroughAFID = {fallback};\n\n'
+        )
+
+        # ===== Static data struct and getter =====
+        out.write(
+            "struct AELStaticData {\n"
+            "    uint64_t fallthroughAFID;\n"
+            "    std::string_view rackUnitPosition;\n"
+            "    std::string_view schema;\n"
             "};\n\n"
+        )
+        out.write(
+            "struct AFIDResult {\n"
+            "    uint64_t afid;\n"
+            "    std::vector<std::string_view> origins;\n"
+            "    std::vector<std::string_view> redfishMappings;\n"
+            "    std::string_view description;\n"
+            "    std::string_view rackUnitPosition;\n"
+            "    std::string_view schema;\n"
+            "};\n\n"
+        )
+        out.write(
+            "inline AELStaticData getStaticData()\n"
+            "{\n"
+            "    return {\n"
+            "        kFallthroughAFID,\n"
+            "        kRackUnitPosition,\n"
+            "        kSchema\n"
+            "    };\n"
+            "}\n\n"
         )
 
         # ===== Match functions =====
@@ -342,11 +435,11 @@ def generate(data, out_path, input_file):
         out.write("    std::string_view message,\n")
         out.write("    const std::map<std::string, std::string>& additionalData)\n")
         out.write("{\n")
-        
+
         out.write(
             "    if(message.empty()){\n"
-            '       lg2::warning("[AEL] Empty message string passed to lookupAFID.");\n'
-            f"       return {{ {fallback}, {{}} }};\n"
+            '        lg2::warning("[AEL] Empty message string passed to lookupAFID.");\n'
+            "        return { 0, {}, {}, {}, {}, {} };\n"
             "    }\n\n"
         )
 
@@ -358,31 +451,38 @@ def generate(data, out_path, input_file):
                 origins = [
                     o.strip() for o in node["originOfCondition"].split(",")
                 ]
-
                 origins_cpp = ", ".join(
                     f'"{escape(origin)}"' for origin in origins
                 )
 
+                redfishMappings = [
+                    r.strip() for r in node["redfishMapping"].split(",")
+                ]
+                redfishMappings_cpp = ", ".join(
+                    f'"{escape(r)}"' for r in redfishMappings
+                )
+
+                description_cpp = escape(node["description"])
+
                 out.write(
-                    f'{ind}return {{ {node["afid"]}, '
-                    f"{{ {origins_cpp} }} }};\n"
+                    f'{ind}return {{ {node["afid"]},\n'
+                    f'{ind}    {{ {origins_cpp} }},\n'
+                    f'{ind}    {{ {redfishMappings_cpp} }},\n'
+                    f'{ind}    "{description_cpp}",\n'
+                    f'{ind}    kRackUnitPosition,\n'
+                    f'{ind}    kSchema }};\n'
                 )
                 return
 
             for k, v in sorted(node.items()):
-
                 keyword, pattern = split_keyword_pattern(k)
-
                 arr = pool.get(split_patterns(pattern))
-                
                 out.write(
                     f"{ind}if(matchAny("
                     f'getMapValue(additionalData, "{escape(keyword)}"), '
                     f"{arr})){{\n"
                 )
-
                 emit(v, indent + 4)
-
                 out.write(f"{ind}}}\n")
 
         for message, msgv in sorted(lookup.items()):
@@ -390,12 +490,19 @@ def generate(data, out_path, input_file):
 
             emit(msgv, 8)
 
+            # Message matched but no arg matched — return fallback AFID
+            out.write(
+                f'        lg2::warning("[AEL] Message matched but no arg match. '
+                f'Using fallback AFID {fallback}.");\n'
+            )
+            out.write(
+                f"        return {{ {fallback}, {{}}, {{}}, {{}}, {{}}, {{}} }};\n"
+            )
             out.write("    }\n")
 
-        out.write(f'    lg2::warning("[AEL] No match found in LUT.");\n')
-        out.write(f"    return {{ {fallback}, {{}} }};\n")
+        # No message matched — return zero AFID with all null data
+        out.write("    return { 0, {}, {}, {}, {}, {} };\n")
         out.write("}\n")
-
 
 # ==========================================================
 # MAIN

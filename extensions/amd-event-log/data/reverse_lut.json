@@ -1,75 +1,1783 @@
 {
-    "version": "1.2.1",
-    "generated_at": "2026-05-27 14:56:52.533657",
-    "fallthrough_afid": 12999,
-    "lookup": {
-        "xyz.openbmc_project.State.Leak.Detector.LeakDetectedWarning": {
-            "NAME=/xyz/openbmc_project/state/leak/detector/EAM0_Cold_Plate": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC,test,ABC",
-                "afid": 1
-            },
-            "NAME=/xyz/openbmc_project/state/leak/detector/EAM1_Cold_Plate": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 2
-            },
-            "NAME=/xyz/openbmc_project/state/leak/detector/EAM2_Cold_Plate": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 3
-            },
-            "NAME=/xyz/openbmc_project/state/leak/detector/EAM3_Cold_Plate": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 4
-            },
-            "NAME=/xyz/openbmc_project/state/leak/detector/CPU_DIMM_Cold_Plate": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 5
-            }
-        },
-        "xyz.openbmc_project.State.Leak.Detector.LeakDetectedCritical": {
-            "DEVICE=/xyz/openbmc_project/state/leak/detector/Manifold_1": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/DEF",
-                "afid": 6
-            },
-            "DEVICE=/xyz/openbmc_project/state/leak/detector/Manifold_2": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/DEF",
-                "afid": 7
-            }
-        },
-        "xyz.openbmc_project.Sensor.Threshold.ReadingAboveLowerCriticalThreshold": {
-            "SensorName=BRB_L_VR_*_VOLT_V": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/XYZ",
-                "afid": 8
-            },
-            "SensorName=BRB_L_VR_*_CURR_A": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/XYZ",
-                "afid": 9
-            },
-            "SensorName=BRB_L_*_TEMP_C|EAM0_*_Temp_C|EAM1_*_Temp_C": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/XYZ",
-                "afid": 10
-            },
-            "SensorName=BRB_L_VR_*_PWR_W": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/XYZ",
-                "afid": 11
-            }
-        },
-        "xyz.openbmc_project.Sensor.Threshold.ReadingAboveUpperHardShutdownThreshold": {
-            "SensorName=MB_*_VOLT_V": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 12
-            },
-            "SensorName=MB_VR_*_CURR_A": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 13
-            },
-            "SensorName=MB_*_TEMP_C": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 14
-            },
-            "SensorName=MB_*_TEMP_W": {
-                "originOfCondition": "/xyz/openbmc_project/inventory/system/Board/ABC",
-                "afid": 15
-            }
-        }
+  "version": "1.0.0",
+  "generated_at": "2026-08-11 21:55:49.887272",
+  "fallthrough_afid": 12999,
+  "rackUnitPosition": "/xyz/openbmc_project/inventory/system/board/Anacapa_NFC_Tag",
+  "schema": "#AMD_Message.v1_0_0.AMD_Message",
+  "lookup": {
+    "xyz.openbmc_project.State.Power.PowerRailFault": {
+      "POWER_RAIL=AMCROT_BMC_S5_RDY_R|AMC_RDY_R|AMC_STBY_PGOOD_R|DIMM_PMIC_PG_TIMEOUT|EAM0_CPU_MOD_PWR_GD_R|EAM1_CPU_MOD_PWR_GD_R|EAM2_CPU_MOD_PWR_GD_R|EAM3_CPU_MOD_PWR_GD_R|FM_CPU0_DIMM_AH_P12V_EN_R_FLT|FM_CPU0_DIMM_IP_P12V_EN_R_FLT|FM_DIMM_AH_FAIL|FM_DIMM_IP_FAIL|FM_MAIN_PWREN_RMC_EN_ISO|FM_PVDD18_S5_P0_FLT|FM_PVDD33_S5_P0_FLT|FM_PVDDCR_CPU0_P0_FLT|FM_PVDDCR_CPU1_P0_FLT|FM_PVDDCR_SOC_P0_FLT|FM_PVDDIO_MEM_S3_P0_FLT|FM_PVDDIO_P0_FLT|FM_PWRGD_CPU0_PWROK|FM_RST_CPU0_RESET_N|P12V_DDR_AH_PWRGD_R|P12V_DDR_IP_PWRGD_R|PWRGD_PVDD18_S5_P0_PG|PWRGD_PVDD33_S5_P0_PG|PWRGD_PVDDCR_CPU0_P0|PWRGD_PVDDCR_CPU1_P0|PWRGD_PVDDCR_SOC_P0|PWRGD_PVDDIO_MEM_S3_P0|PWRGD_PVDDIO_P0": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12021,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "POWER_RAIL=HPM_PWR_FAIL|HPM_STBY_RST_N|LPDB_P50V_FAN0_R2_PG|LPDB_P50V_FAN1_R2_PG|LPDB_P50V_FAN2_R2_PG|LPDB_P50V_FAN3_R2_PG|LPDB_P50V_FAN4_R2_PG|PDB_P12V_VRM0_FLT|PWRGD_P12V_VRM0_CPLD_PG_R|PWRGD_P1V0_STBY|PWRGD_P3V3|PWRGD_PDB_HSC4_CPLD_PG_R": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12022,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "POWER_RAIL=FM_P3V3_EN_FLT|PDB_MAIN_EN_R_FLT|PDB_P12V_VRM1_FLT|PWRGD_P12V_VRM1_CPLD_PG_R|RPDB_P50V_FAN5_R2_PG|RPDB_P50V_FAN6_R2_PG|RPDB_P50V_FAN7_R2_PG|RPDB_P50V_FAN8_R2_PG": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12023,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "POWER_RAIL=BRIDGE_L_STBY_PG_R|L_BNIC0_FLT|L_BNIC1_FLT|L_BNIC2_FLT|L_BNIC3_FLT|L_EDSFF2_PG|L_EDSFF3_PG|L_FNIC_FLT|L_RTM_SW_FLT": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12019,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "POWER_RAIL=BRIDGE_R_STBY_PG_R|HPM_EDSFF_PG|R_BNIC0_FLT|R_BNIC1_FLT|R_BNIC2_FLT|R_BNIC3_FLT|R_EDSFF2_PG|R_EDSFF3_PG|R_RTM_SW_FLT": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12020,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      }
+    },
+    "xyz.openbmc_project.State.Leak.Detector.LeakDetectedWarning": {
+      "DETECTOR_NAME=/xyz/openbmc_project/state/leak/detector/EAM*_Cold_Plate": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12018,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "DETECTOR_NAME=/xyz/openbmc_project/state/leak/detector/CPU_DIMM_Cold_Plate": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12017,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      }
+    },
+    "xyz.openbmc_project.State.Leak.Detector.LeakDetectedCritical": {
+      "DETECTOR_NAME=/xyz/openbmc_project/state/leak/detector/Manifold_*": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12016,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingAboveLowerCriticalThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12041,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12040,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12026,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12024,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12027,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12025,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12038,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12042,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12043,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12044,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12045,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12046,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12039,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12047,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12048,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12049,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12050,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12030,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12028,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12032,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12029,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12031,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12036,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12035,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12033,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12037,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12034,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingAboveLowerSoftShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12068,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12067,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12065,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12063,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12066,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12064,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12051,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12069,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12070,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12071,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12072,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12073,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12052,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12074,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12075,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12076,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12077,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12053,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12054,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12057,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12055,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12056,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12061,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12058,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12059,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12062,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12060,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingAboveUpperCriticalThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12095,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12094,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12091,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12093,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12092,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12090,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12078,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12096,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12097,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12098,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12099,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12100,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12079,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12101,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12102,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12103,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12104,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12080,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12081,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12084,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12082,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12083,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12088,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12085,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12086,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12089,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12087,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingAboveUpperSoftShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12122,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12121,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12118,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12120,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12119,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12117,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12105,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12123,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12124,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12125,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12126,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12127,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12106,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12128,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12129,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12130,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12131,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12107,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12108,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12111,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12109,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12110,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12115,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12112,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12113,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12116,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12114,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingAboveUpperHardShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12149,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12148,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12145,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12147,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12146,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12144,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12132,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12150,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12151,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12152,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12153,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12154,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12133,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12155,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12156,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12157,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12158,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12134,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12135,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12138,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12136,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12137,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12142,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12139,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12140,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12143,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12141,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingBelowLowerCriticalThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12176,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12175,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12172,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12174,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12173,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12171,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12159,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12177,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12178,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12179,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12180,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12181,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12160,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12182,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12183,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12184,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12185,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12161,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12162,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12165,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12163,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12164,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12169,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12166,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12167,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12170,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12168,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingBelowLowerSoftShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12203,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12202,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12199,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12201,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12200,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12198,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12186,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12204,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12205,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12206,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12207,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12208,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12187,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12209,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12210,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12211,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12212,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12188,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12189,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12192,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12190,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12191,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12196,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12193,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12194,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12197,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12195,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingBelowLowerHardShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12230,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12229,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12226,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12228,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12227,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12225,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12213,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12231,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12232,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12233,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12234,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12235,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12214,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12236,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12237,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12238,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12239,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12215,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12219,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12218,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12216,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12217,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12223,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12220,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12221,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12224,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12222,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingBelowUpperSoftShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12257,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12256,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12253,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12255,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12254,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12252,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12240,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12258,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12259,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12260,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12261,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12262,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12241,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12263,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12264,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12265,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12266,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12242,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12246,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12245,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12243,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12244,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12250,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12247,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12248,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12251,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12249,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Sensor.Threshold.ReadingBelowUpperHardShutdownThreshold": {
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/SCM_P*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12284,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/SCM_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/SCM",
+        "afid": 12283,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/SCM"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/MB_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12280,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/MB_VR_CPU_PVDD*_P0_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12282,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/MB_*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12281,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/MB_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12279,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12267,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/BRB_L_FE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12285,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12286,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM0_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12287,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12288,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM1_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12289,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/BRB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12268,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12290,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM2_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12291,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC0_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12292,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/sensor/EAM3_BE_NIC1_Temp_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12293,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN0_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN1_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN2_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN3_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN4_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12269,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_L_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12273,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_L_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12272,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_L_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12270,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_L_P50V_HSC*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_L",
+        "afid": 12271,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_L"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/voltage/PDB_R_*_VOLT_V": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12277,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN5_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN6_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN7_TACH_OL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_IL_SPEED_RPM|/xyz/openbmc_project/sensors/fan_tach/FAN8_TACH_OL_SPEED_RPM": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12274,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/current/PDB_R_P50V_HSC*_CURR_A": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12275,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/power/PDB_R_P50V_HSC*_PWR_W": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12278,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      },
+      "SENSOR_NAME=/xyz/openbmc_project/sensors/temperature/PDB_R_*_TEMP_C": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/PDB_R",
+        "afid": 12276,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/PDB_R"
+      }
+    },
+    "xyz.openbmc_project.Software.Update.ActivateFailed": {
+      "TARGET_NAME=Anacapa_SCM_CPLD": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/Anacapa_SCM",
+        "afid": 12001,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/Anacapa_SCM"
+      },
+      "TARGET_NAME=Anacapa_LBB_*": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_L",
+        "afid": 12002,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_L"
+      },
+      "TARGET_NAME=Anacapa_RBB_*": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/BRB_R",
+        "afid": 12003,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/BRB_R"
+      },
+      "TARGET_NAME=Anacapa_BIOS|Anacapa_MB_CPLD|Anacapa_MB_VR_pvdd18_s5_p0|Anacapa_MB_VR_pvdd33_s5_p0|Anacapa_MB_VR_pvddcr_cpu0_p0|Anacapa_MB_VR_pvddcr_cpu1_p0|Anacapa_MB_VR_pvddcr_soc_p0": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/MB",
+        "afid": 12004,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/MB"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_39": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_39",
+        "afid": 12005,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_39"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_40": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_40",
+        "afid": 12006,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_40"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_41": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_41",
+        "afid": 12007,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_41"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_42": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_42",
+        "afid": 12008,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_42"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_43": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_43",
+        "afid": 12009,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_43"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_44": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_44",
+        "afid": 12010,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_44"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_45": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_45",
+        "afid": 12011,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_45"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_46": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_46",
+        "afid": 12012,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_46"
+      },
+      "TARGET_NAME=AMD_OCP_NIC_47": {
+        "originOfCondition": "/xyz/openbmc_project/inventory/system/board/AMD_OCP_NIC_47",
+        "afid": 12013,
+        "description": "Compute Tray Error",
+        "redfishMapping": "/redfish/v1/Chassis/AMD_OCP_NIC_47"
+      }
     }
+  }
 }
