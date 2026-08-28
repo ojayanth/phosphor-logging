@@ -175,6 +175,13 @@ fs::path serializeJSON(const Entry& e, const fs::path& dir)
     j["eventId"] = e.eventId();
     j["resolution"] = e.resolution();
 
+    j["plugins"] = nlohmann::json::object();
+
+    for (const auto& plugin : e.getPlugins())
+    {
+        j["plugins"][std::string(plugin->interface())] = plugin->serialize();
+    }
+
     std::ofstream os(path.c_str());
     os << j.dump(4);
     return path;
