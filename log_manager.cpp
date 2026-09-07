@@ -37,6 +37,11 @@ extern const std::map<
     std::function<phosphor::logging::metadata::associations::Type>>
     meta;
 
+namespace
+{
+constexpr auto extensionsKey = "_EXTENSIONS";
+} // namespace
+
 namespace phosphor
 {
 namespace logging
@@ -838,6 +843,16 @@ auto Manager::create(const std::string& message, Entry::Level severity,
                      const FFDCEntries& ffdc) -> sdbusplus::object_path
 {
     auto data = additionalData;
+    constexpr std::string_view extensionInterface{RUNTIME_METADATA_PLUGIN};
+
+    if (!extensionInterface.empty())
+    {
+        auto metadata = collectRuntimeMetadata(message, severity, data);
+        if (!metadata.empty())
+        {
+            updateExtensions(data, extensionInterface, metadata);
+        }
+    }
     auto requests = buildEventExtensionRequests(data);
 
     return createEntry(message, severity, std::move(data), ffdc,
@@ -1092,6 +1107,56 @@ auto Manager::buildEventExtensionRequests(
     additionalData.erase(extIt);
 
     return requests;
+}
+
+void Manager::updateExtensions(
+    std::map<std::string, std::string>& additionalData,
+    std::string_view interface, const nlohmann::json& payload)
+{
+    nlohmann::json extensions = nlohmann::json::object();
+
+    auto extIt = additionalData.find(extensionsKey);
+    if (extIt != additionalData.end())
+    {
+        try
+        {
+            extensions = nlohmann::json::parse(extIt->second);
+        }
+        catch (const std::exception& e)
+        {
+            lg2::warning("Failed to parse extension metadata: {ERROR}", "ERROR",
+                         e.what());
+        }
+    }
+
+    extensions[std::string(interface)] = payload;
+    additionalData[extensionsKey] = extensions.dump();
+}
+
+nlohmann::json Manager::collectRuntimeMetadata(
+    const std::string& message, Entry::Level level,
+    const std::map<std::string, std::string>& additionalData)
+{
+    auto metadata = nlohmann::json::object();
+
+    for (auto& provider : Extensions::getRuntimeMetadataFunctions())
+    {
+        try
+        {
+            provider(metadata, message, level, additionalData);
+        }
+        catch (const std::exception& e)
+        {
+            lg2::warning("Ignoring runtime metadata exception: {ERROR}",
+                         "ERROR", e.what());
+        }
+        catch (...)
+        {
+            lg2::warning("Ignoring unknown runtime metadata exception");
+        }
+    }
+
+    return metadata;
 }
 
 } // namespace internal
