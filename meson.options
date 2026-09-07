@@ -1,6 +1,12 @@
 option('libonly', type: 'boolean', description: 'Build library only')
 option('tests', type: 'feature', description: 'Build tests')
 option(
+    'amd-event-log',
+    type: 'feature',
+    description: 'Enable AMD Event Logging (AEL) extension',
+    value: 'enabled',
+)
+option(
     'openpower-pel-extension',
     type: 'feature',
     description: 'Create PELs',
@@ -72,6 +78,6 @@ option(
 option(
     'runtime-metadata-plugin',
     type: 'string',
-    value: '',
+    value: 'xyz.openbmc_project.Logging.Extension.CPER.Processed',
     description: 'Enable runtime extension enrichment',
 )
