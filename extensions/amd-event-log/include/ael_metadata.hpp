@@ -17,6 +17,7 @@ namespace fields
 
 constexpr std::string_view Version = "AEL.VERSION";
 constexpr std::string_view AFID = "AEL.AFID";
+constexpr std::string_view Description = "AEL.DESCRIPTION";
 constexpr std::string_view FruList = "AEL.FRU_LIST";
 constexpr std::string_view RackId = "AEL.RACK_ID";
 

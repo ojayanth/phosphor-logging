@@ -8,15 +8,6 @@ namespace phosphor::logging::extensions::ael::redfish
 {
 
 /**
- * @brief Resolve an AFID description.
- *
- * @param[in] afid AMD Field Identifier.
- *
- * @return Human-readable AFID description.
- */
-[[nodiscard]] std::string getAFIDDescription(uint64_t afid);
-
-/**
  * @brief Parse a comma-separated FRU list.
  *
  * @param[in] value Comma-separated FRU list.

@@ -18,7 +18,21 @@ AELInfo AELInfoProvider::get() const
     auto afidInfo = lookupAFID(msg, additionalData);
 
     info.afid = afidInfo.afid;
-    info.fruList = afidInfo.frus;
+    info.redfishList = afidInfo.redfishMappings;
+    info.description = afidInfo.description;
+
+    return info;
+}
+
+AELStaticInfo AELStaticInfoProvider::get() const
+{
+    AELStaticInfo info;
+
+    const auto staticInfo = getStaticData();
+
+    info.version = staticInfo.schema;
+    info.rackUnitPosition = staticInfo.rackUnitPosition;
+    info.fallthroughAFID = staticInfo.fallthroughAFID;
 
     return info;
 }

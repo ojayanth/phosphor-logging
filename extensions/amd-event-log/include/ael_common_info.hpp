@@ -2,6 +2,7 @@
 
 #include <optional>
 #include <string>
+#include <cstdint>
 
 namespace phosphor::logging::extensions::ael
 {
@@ -15,6 +16,16 @@ namespace phosphor::logging::extensions::ael
  */
 struct CommonInfo
 {
+    /**
+     * Fallthorugh AMD Field Identifier.
+     */
+    uint64_t fallthroughAFID{};
+
+    /**
+     * @brief Schema version associated with the event.
+     */
+    std::optional<std::string> version;
+
     /**
      * @brief Rack identifier associated with the event.
      */

@@ -7,11 +7,11 @@
 namespace phosphor::logging::extensions::ael
 {
 
-AELStaticInfo getStaticData()
+AFIDStaticInfo getStaticData()
 {
     auto result = ::getStaticData();
 
-    return AELStaticInfo{result.fallthroughAFID,
+    return AFIDStaticInfo{result.fallthroughAFID,
                          std::string(result.rackUnitPosition),
                          std::string(result.schema)};
 }

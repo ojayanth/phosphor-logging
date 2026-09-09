@@ -33,16 +33,19 @@ static nlohmann::json createAMDMetadata(const AELInfo& info)
 {
     nlohmann::json amdMetadata;
 
-    amdMetadata[std::string(fields::Version)] = info.version;
-
     if (info.afid != 0)
     {
         amdMetadata[std::string(fields::AFID)] = std::to_string(info.afid);
     }
 
-    if (!info.fruList.empty())
+    if (!info.description.empty())
     {
-        const auto joined = info.fruList | std::views::join_with(',');
+        amdMetadata[std::string(fields::Description)] = info.description;
+    }
+
+    if (!info.redfishList.empty())
+    {
+        const auto joined = info.redfishList | std::views::join_with(',');
 
         const std::string frus(joined.begin(), joined.end());
 
@@ -50,6 +53,11 @@ static nlohmann::json createAMDMetadata(const AELInfo& info)
     }
 
     const CommonInfo commonInfo = getCommonInfo();
+
+    if (commonInfo.version && !commonInfo.version->empty())
+    {
+        amdMetadata[std::string(fields::Version)] = *commonInfo.version;
+    }
 
     if (commonInfo.rackId)
     {
@@ -96,7 +104,7 @@ static void amdRuntimeMetadataProvider(
         const AELInfo info =
             AELInfoProvider(message, level, additionalData).get();
 
-        if (info.afid == 0 && info.fruList.empty())
+        if (info.afid == 0 && info.redfishList.empty())
         {
             lg2::debug("amdRuntimeMetadataProvider: no AEL data found");
             return;

@@ -36,7 +36,7 @@ struct AFIDInfo
 /**
  * @brief Static LUT metadata not associated with any specific event.
  */
-struct AELStaticInfo
+struct AFIDStaticInfo
 {
     /** Fallback AFID returned when a message is known but args
      *  do not resolve to a leaf. */
@@ -58,7 +58,7 @@ struct AELStaticInfo
  *
  * @return Static LUT metadata.
  */
-AELStaticInfo getStaticData();
+AFIDStaticInfo getStaticData();
 
 /**
  * @brief Lookup AFID metadata associated with an event.

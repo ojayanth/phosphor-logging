@@ -1,7 +1,6 @@
 #include "redfish/amd_redfish_projector.hpp"
 
 #include "ael_metadata.hpp"
-#include "redfish/amd_redfish_constants.hpp"
 #include "redfish/amd_redfish_utils.hpp"
 
 #include <charconv>
@@ -35,7 +34,10 @@ void projectAEL(const nlohmann::json& amdMetadata, nlohmann::json& output)
     nlohmann::json fieldId;
 
     fieldId["AFID"] = afid;
-    fieldId["Description"] = getAFIDDescription(afid);
+
+    auto descriptionIt = amdMetadata.find(std::string(fields::Description));
+    fieldId["Description"] =
+        (descriptionIt != amdMetadata.end()) ? *descriptionIt : nlohmann::json(nullptr);
 
     auto fruIt = amdMetadata.find(std::string(fields::FruList));
 
@@ -45,12 +47,7 @@ void projectAEL(const nlohmann::json& amdMetadata, nlohmann::json& output)
 
         for (const auto& fru : splitFRUs(fruIt->get<std::string>()))
         {
-            // TODO:
-            // Resolve inventory object paths into
-            // Redfish resource URIs once inventory-to-
-            // Redfish mapping infrastructure becomes
-            // available.
-            serviceableUnits.push_back({{"InventoryPath", fru}});
+            serviceableUnits.push_back({{"@odata.id", fru}});
         }
 
         if (!serviceableUnits.empty())
@@ -61,6 +58,10 @@ void projectAEL(const nlohmann::json& amdMetadata, nlohmann::json& output)
                 fieldId["ServiceableUnits"].size();
         }
     }
+
+    auto schemaIt = amdMetadata.find(std::string(fields::Version));
+    output["@odata.type"] =
+        (schemaIt != amdMetadata.end()) ? *schemaIt : nlohmann::json(nullptr);
 
     output["AMDFieldIdentifiers"] = nlohmann::json::array();
 
@@ -91,7 +92,6 @@ nlohmann::json project(const nlohmann::json& amdMetadata)
 
     nlohmann::json output;
 
-    output["@odata.type"] = constants::messageOdataType;
     projectAEL(amdMetadata, output);
 
     return output;
