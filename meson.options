@@ -82,3 +82,9 @@ option(
     value: '',
     description: 'Enable runtime extension enrichment',
 )
+
+option(
+    'cper-processor',
+    type: 'feature',
+    description: 'Enable CPER processing daemon',
+)
